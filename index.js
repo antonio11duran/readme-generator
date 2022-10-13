@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = ["What is the project title?",
@@ -8,15 +9,16 @@ const questions = ["What is the project title?",
     "Any installation instructions?",
     "How can this project be used?",
     "Would you like to add any contributions?",
-    "Test instructions?"];
+    "Test instructions?",
+    "Which license did you use?"];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
+function writeToFile(fileName, response) {
     const fileName = 'README.md';
-    const data = '';
+    const data = generateMarkdown(response);
 
     fs.appendFile(fileName, data, (err) =>
-        err ? console.error(err) : console.log('HTML File Created!')
+        err ? console.error(err) : console.log('README Created!')
     )
 }
 
@@ -31,20 +33,35 @@ function init() {
             },
             {
                 type: 'input',
-                message: 'Where are you from?',
-                name: 'location',
+                message: questions[1],
+                name: 'description',
             },
             {
                 type: 'input',
-                message: 'What is you github username?',
-                name: 'github',
+                message: questions[2],
+                name: 'installation',
             },
             {
                 type: 'input',
-                message: 'What is your LinkedIn url?',
-                name: 'linkedin',
+                message: questions[3],
+                name: 'usage',
+            }, {
+                type: 'input',
+                message: questions[4],
+                name: 'contributers',
+            }, {
+                type: 'input',
+                message: questions[5],
+                name: 'test',
+            }, {
+                type: 'expand',
+                message: questions[6],
+                choices: ["None", "Apache", "GNU GPL 3.0", "GNU GPL 2.0", "GNU LGPL", "MIT", "BSD 2", "BSD 3", "Boost", "Creative Commons", "Eclipse", "GNU Affero", "Mozilla", "Unlicense"],
+                default: "None",
+                name: 'license',
             },
         ])
+        .then(writeToFile(response))
 }
 
 // Function call to initialize app
