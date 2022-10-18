@@ -10,7 +10,10 @@ const questions = ["What is the project title?",
     "How can this project be used?",
     "Would you like to add any contributions?",
     "Test instructions?",
-    "Which license did you use?"];
+    "Which license did you use?",
+    "What is your Github username?",
+    "What is a good email to be contacted at for questions?"
+];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, response) {
@@ -59,7 +62,15 @@ function init() {
                 choices: ["None", "Apache", "GNU GPL 3.0", "GNU GPL 2.0", "GNU LGPL", "MIT", "BSD 2", "BSD 3", "Boost", "Creative Commons", "Eclipse", "GNU Affero", "Mozilla", "Unlicense"],
                 default: "None",
                 name: 'license',
-            },
+            }, {
+                type: 'input',
+                message: questions[7],
+                name: 'github',
+            }, {
+                type: 'input',
+                message: questions[8],
+                name: 'email',
+            }
         ])
         .then(writeToFile(response))
 }
