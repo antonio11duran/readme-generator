@@ -1,5 +1,6 @@
 // need to fix how array is set up. when pulling name from array, it comes back as undefined
-const names = ["Apache",
+const names = ["None",
+  "Apache",
   "GNU GPL 3.0",
   "GNU GPL 2.0",
   "GNU LGPL",
@@ -11,9 +12,10 @@ const names = ["Apache",
   "Eclipse",
   "GNU Affero",
   "Mozilla",
-  "Unlicense"]
+  "Unlicense"];
 
-const badgeUrls = ["[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
+const badgeUrls = ["",
+  "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
   "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)",
   "[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)",
   "[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)",
@@ -25,9 +27,10 @@ const badgeUrls = ["[![License](https://img.shields.io/badge/License-Apache_2.0-
   "[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)",
   "[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)",
   "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)",
-  "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)"]
+  "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)"];
 
-const links = ["https://choosealicense.com/licenses/apache-2.0/",
+const links = ["No License",
+  "https://choosealicense.com/licenses/apache-2.0/",
   "https://choosealicense.com/licenses/gpl-3.0/",
   "https://choosealicense.com/licenses/gpl-2.0/",
   "https://choosealicense.com/licenses/lgpl-3.0/",
@@ -39,16 +42,17 @@ const links = ["https://choosealicense.com/licenses/apache-2.0/",
   "https://choosealicense.com/licenses/epl-1.0/",
   "https://choosealicense.com/licenses/agpl-3.0/",
   "https://choosealicense.com/licenses/mpl-2.0/",
-  "https://choosealicense.com/licenses/unlicense/"]
+  "https://choosealicense.com/licenses/unlicense/"];
 
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
+  console.log(license);
   for (let i = 0; i < names.length; i++) {
-    if (license == names[i]) {
+    console.log(names[i]);
+    if ((license) == (names[i])) {
+      console.log(names[i]);
       return badgeUrls[i];
-    } else {
-      return "";
     }
   }
 }
@@ -57,10 +61,8 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   for (let i = 0; i < names.length; i++) {
-    if (license == names[i]) {
+    if ((license) == (names[i])) {
       return links[i];
-    } else {
-      return "No License";
     }
   }
 }
@@ -81,43 +83,43 @@ function renderLicenseSection(license) {
 function generateMarkdown(data) {
   return `# ${data.title}
 
-  ${renderLicenseBadge(data.license)}
-  
-  ## Description
-  
-  ${data.description}
-  
-  ## Table of Contents
-  
-  [Installation](#installation)
-  [Usage](#usage)
-  [License](#license)
-  [Contributing](#contributing)
-  [Tests](#tests)
-  [Questions](#questions)
-  
-  ## Installation
-  
-  ${data.installation}
+${renderLicenseBadge(data.license)}
 
-  ## Usage
-  
-  ${data.usage}
+## Description
 
-  ${renderLicenseSection(data.license)}
-  
-  ## Contributing
-  
-  ${data.contributers}
-  
-  ## Tests
-  
-  ${data.test}
-  
-  ## Questions
-  
-  ${data.github}
-  ${data.email}
+${data.description}
+
+## Table of Contents
+
+[Installation](#installation)
+[Usage](#usage)
+[License](#license)
+[Contributing](#contributing)
+[Tests](#tests)
+[Questions](#questions)
+
+## Installation
+
+${data.installation}
+
+## Usage
+
+${data.usage}
+
+${renderLicenseSection(data.license)}
+
+## Contributing
+
+${data.contributers}
+
+## Tests
+
+${data.test}
+
+## Questions
+
+Github: ${data.github}
+Email: ${data.email}
 
 `;
 }
