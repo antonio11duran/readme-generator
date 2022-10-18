@@ -17,16 +17,6 @@ const questions = ["What is the project title?",
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, response) {
-    const fileName = 'README.md';
-    const data = generateMarkdown(response);
-
-    fs.appendFile(fileName, data, (err) =>
-        err ? console.error(err) : console.log('README Created!')
-    )
-}
-
-// TODO: Create a function to initialize app
-function init() {
     inquirer
         .prompt([
             {
@@ -57,7 +47,7 @@ function init() {
                 message: questions[5],
                 name: 'test',
             }, {
-                type: 'expand',
+                type: 'list',
                 message: questions[6],
                 choices: ["None", "Apache", "GNU GPL 3.0", "GNU GPL 2.0", "GNU LGPL", "MIT", "BSD 2", "BSD 3", "Boost", "Creative Commons", "Eclipse", "GNU Affero", "Mozilla", "Unlicense"],
                 default: "None",
@@ -72,7 +62,19 @@ function init() {
                 name: 'email',
             }
         ])
-        .then(writeToFile(response))
+        .then((response) => {
+            const fileName = `README.md`
+            const data = generateMarkdown(response);
+
+            fs.appendFile(fileName, data, (err) =>
+                err ? console.error(err) : console.log('README Created!')
+            );
+        })
+}
+
+// TODO: Create a function to initialize app
+function init() {
+    writeToFile();
 }
 
 // Function call to initialize app
