@@ -47,11 +47,8 @@ const links = ["No License",
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  console.log(license);
   for (let i = 0; i < names.length; i++) {
-    console.log(names[i]);
     if ((license) == (names[i])) {
-      console.log(names[i]);
       return badgeUrls[i];
     }
   }
