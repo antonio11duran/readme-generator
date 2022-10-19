@@ -7,9 +7,13 @@ This project uses your terminal and node to generate a README.md file for your p
 ## Table of Contents
 
 [Installation](#installation)
+
 [Usage](#usage)
+
 [Contributing](#contributing)
+
 [Tests](#tests)
+
 [Questions](#questions)
 
 ## Installation
